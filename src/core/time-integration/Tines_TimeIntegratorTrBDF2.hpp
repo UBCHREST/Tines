@@ -231,7 +231,7 @@ namespace Tines {
             });
             r_val = 1;
             for(int i =0; i < m ; i++){
-                std::cout << "u[" << i << "]: " << std::setprecision(16) << u(i) << std::endl;
+                std::cout << "vals[" << i << "]: " << std::setprecision(16) << vals(i) << std::endl;
             }
 
             break;
