@@ -230,10 +230,6 @@ namespace Tines {
                      int(member.league_rank()), dt);
             });
             r_val = 1;
-            for(int i =0; i < m ; i++){
-                std::cout << "vals[" << i << "]: " << std::setprecision(16) << vals(i) << std::endl;
-            }
-
             break;
           }
         }

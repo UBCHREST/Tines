@@ -149,6 +149,9 @@ namespace Tines {
         } 
         
         if (is_valid) {
+            if(std::isinf(J(0))){
+                std::cout << "isNan" << std::endl;
+            }
           /// solve the equation: dx = -J^{-1} f(x);
           Tines::SolveLinearSystem ::invoke(member, J, dx, f, work,
                                             matrix_rank, !is_jacobian_new);
