@@ -39,7 +39,6 @@ namespace Tines {
           const value_type val = A[i * as0];
           update +=
             (ats<value_type>::isNan(val) || ats<value_type>::isInf(val));
-            std::cout << "ck: " << val << " " << ats<value_type>::isNan(val)  << " " << ats<value_type>::isInf(val) << std::endl;
         },
         num_nan_inf);
       member.team_barrier();
@@ -54,8 +53,6 @@ namespace Tines {
            /* */ bool &is_valid) {
       using value_type = ValueType;
       int num_nan_inf(0);
-       std::cout << typeid(ValueType).name() << " " << typeid(value_type).name() << std::endl;
-
       Kokkos::parallel_reduce(
         Kokkos::TeamVectorRange(member, m * n),
         [&](const int &ij, int &update) {
