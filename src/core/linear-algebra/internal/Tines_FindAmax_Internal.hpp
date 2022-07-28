@@ -69,13 +69,7 @@ namespace Tines {
             }
           },
           reducer_value);
-        Kokkos::single(Kokkos::PerTeam(member), [&]() {
-            if(value.loc > m){
-                throw std::invalid_argument("MaxLocation Not Found " + std::to_string(value.loc) + " : " + std::to_string(value.val));
-            }
-
-            *idx = value.loc;
-        });
+        Kokkos::single(Kokkos::PerTeam(member), [&]() { *idx = value.loc; });
       } else {
         Kokkos::single(Kokkos::PerTeam(member), [&]() { *idx = 0; });
       }

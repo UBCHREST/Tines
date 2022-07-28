@@ -196,6 +196,9 @@ namespace Tines {
                                       qptr, qs0, Uptr, us0, us1, sptr, ss0,
                                       work_utv, matrix_rank);
         member.team_barrier();
+        if(r_val){
+            return r_val;
+        }
       }
 
       value_type *Xptr = X.data();

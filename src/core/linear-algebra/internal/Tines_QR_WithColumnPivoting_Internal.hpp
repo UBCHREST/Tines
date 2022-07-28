@@ -127,6 +127,10 @@ namespace Tines {
         // find max location
         FindAmaxInternal::invoke(member, n_AR, norm_part1x2.AR, 1, pividx);
         member.team_barrier();
+        // If A is near inf the norm may be inf/nan.  Instead of checking AR for inf/nan check for an invalid pividx.
+        if (*pividx < 0){
+            return 1;
+        }
 
         // apply pivot
         ApplyPivotVectorForwardInternal::invoke(member, *pividx,

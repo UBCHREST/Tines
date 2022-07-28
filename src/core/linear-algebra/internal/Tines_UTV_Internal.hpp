@@ -64,8 +64,10 @@ namespace Tines {
       wptr += 3 * max_mn;
 
       matrix_rank = -1;
-      QR_WithColumnPivotingInternal ::invoke(member, m, n, A, as0, as1, t, ts0,
-                                             p, ps0, work, matrix_rank);
+      if(auto rvalue = QR_WithColumnPivotingInternal ::invoke(member, m, n, A, as0, as1, t, ts0,
+                                             p, ps0, work, matrix_rank)){
+          return rvalue;
+      }
 
       QR_FormQ_Internal ::invoke(member, m, matrix_rank, A, as0, as1, t, ts0, U,
                                  us0, us1, work);
@@ -106,8 +108,10 @@ namespace Tines {
       wptr += 3 * max_mn;
 
       matrix_rank = -1;
-      QR_WithColumnPivotingInternal ::invoke(member, m, n, A, as0, as1, q, qs0,
-                                             p, ps0, work, matrix_rank);
+      if(auto rvalue = QR_WithColumnPivotingInternal ::invoke(member, m, n, A, as0, as1, q, qs0,
+                                           p, ps0, work, matrix_rank)){
+          return rvalue;
+      }
       member.team_barrier();
 
       /// for rank deficient matrix

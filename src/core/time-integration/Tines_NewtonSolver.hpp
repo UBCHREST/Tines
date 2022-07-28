@@ -150,19 +150,25 @@ namespace Tines {
         
         if (is_valid) {
           /// solve the equation: dx = -J^{-1} f(x);
-          Tines::SolveLinearSystem ::invoke(member, J, dx, f, work,
-                                            matrix_rank, !is_jacobian_new);
+          if(!Tines::SolveLinearSystem ::invoke(member, J, dx, f, work,
+                                            matrix_rank, !is_jacobian_new)) {
 
 #if defined(TINES_ENABLE_NEWTON_WRMS)
-          updateSolutionAndCheckConvergenceUsingWrmsNorm(member, atol, rtol, m,
-                                                         x, dx, f, converge);
+              updateSolutionAndCheckConvergenceUsingWrmsNorm(member, atol, rtol, m,
+                                                             x, dx, f, converge);
 #else
-          updateSolutionAndCheckConvergence(member, atol, rtol, m, x, dx, f,
-                                            norm2_f0, converge);
+              updateSolutionAndCheckConvergence(member, atol, rtol, m, x, dx, f,
+                                                norm2_f0, converge);
 #endif
-          converge = do_not_check_converge ? false : converge;
+              converge = do_not_check_converge ? false : converge;
+          }else{
+              // the search path contains either Nan or Inf so return from the function allowing a smaller time step to be used.
+              iter_count = iter;
+              converge = false;
+              return;
+          }
         } else {
-          // the  J contains either Nan or Inf so return from the function allowing a smaller time step to be usec.
+          // the  J contains either Nan or Inf so return from the function allowing a smaller time step to be used.
           iter_count = iter;
           converge = false;
           return;
