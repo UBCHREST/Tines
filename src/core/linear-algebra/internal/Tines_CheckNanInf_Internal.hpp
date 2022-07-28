@@ -39,6 +39,7 @@ namespace Tines {
           const value_type val = A[i * as0];
           update +=
             (ats<value_type>::isNan(val) || ats<value_type>::isInf(val));
+            std::cout << "ck: " << val << " " << ats<value_type>::isNan(val)  << " " << ats<value_type>::isInf(val) << std::endl;
         },
         num_nan_inf);
       member.team_barrier();
