@@ -123,7 +123,7 @@ namespace Tines {
             reducer_value);
           member.team_barrier();
           // If no max value is found, assume 0 index to allow for future iterations
-          k = Kokkos::reduction_identity<int_type>::max() == value.loc ? 0 : value.loc;
+          k = Kokkos::reduction_identity<int>::max() == value.loc ? 0 : value.loc;
         }
 
         const real_type diff = ats<real_type>::abs(f_h(k) - f_0(k));
